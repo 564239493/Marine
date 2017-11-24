@@ -1,0 +1,24 @@
+
+关于前端出牌提示：
+	1.参数:myCardArray[[110,210,309]],putCardArray[109,209]
+	2.将 putCardArray 转为十六进制Array[9,25]
+	3.根据 putCardArray 来获取需提示牌型和牌值
+	  putCardArray.length == 2可能是对子或者王炸，先判断对子
+	  >(对子)判断两个数字是否相等,getCardValue方法进行运算cardData & this.MASK_VALUE
+	  0x09 & 0x0F = 9   	0x19 & 0x0F = 9
+	  9 & 0x0F = 9		25 & 0x0F = 9
+	  两者相等 = 对子，返回{type:对子,value:9}
+	  >(王炸先不考虑)
+	4.根据{type:对子,value:9}去myCardArray中寻找符合条件的牌，这里就寻找对子findDouble方法
+	5.findDouble传参:cardData=手中的牌[10,26,41],minCard:条件牌此处即9，意思是，从手中牌里找出比9大的对子
+	  >该方法里，先sortByCardData(cardData),根据牌值排序，从大到小，2最大,getCardValue值相同，则比较花色
+	  >排序后，for循环比较i和i+1,找出所有符合条件的对子
+	  >(该方法可能是为了排除一些意外数据)removeSameValue后得到[[10,26]](此处是Array<number[]>)
+	  >reverse() 方法用于颠倒数组中元素的顺序。[[10,26]]
+	6.(不管什么类型，最后都需查询是否有炸弹)boomResult   findBoom方法(炸弹)
+	   boomResult.reverse();
+	7.boomResult   findRocket方法(王炸)
+	8.result.concat(boomResult)
+	9.this.turnData2poker
+	10.得到结果:[[110,210]]
+
