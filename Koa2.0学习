@@ -1,0 +1,42 @@
+Koa2.0入门
+	1.node/npm启动
+	2.package.json工程信息,app.js创建服务
+	3.require 写成了 reuqire,还各种找问题，(lll￢ω￢)
+URL:
+	1.koa-router 7.0.0 
+	2.koa-bodyparser 3.2.0----简单页面已成，所有URL处理都在app.js
+	3.参照电气项目路由，实现koa路由
+Nunjucks
+	1.settings -->languages-->javascript设置javascript language version
+
+9/9
+	
+	现在你明白了，如果你想你的模块是一个特定的类型就用Module.exports。
+	如果你想的模块是一个典型的“实例化对象”就用exports。
+
+	Express的API很简单，但是它是基于ES5的语法，要实现异步代码，只有一个方法：回调
+	为了简化异步代码，ES7（目前是草案，还没有发布）引入了新的关键字async和await
+
+	async 和 await // 中间件,这一词汇的含义等价于“插件”（plugin）——用于扩展功能的可拆装模块。主要用途是为本程序提供一些框架本身不提供的功能。
+
+	node版本7.6以上可以直接使用async/await;
+	从上述例子可以看出 async/await 的特点：
+
+9/18
+	自ES6确定和ES7的async/await开始普及，node.js的发展变得更加迅速，可以预见到JavaScript中令人“头疼”的多层嵌套回调（注意是”多层嵌套回调“）将会使用Promise + async/await的方式逐渐替代（不是完全替代，多层嵌套回调也有其特殊的应用场景）。
+
+	koa2 大势所趋的前景
+	基于async/await实现中间体系的koa2框架将会是是node.js web开发方向大势所趋的普及框架。基于generator/yield的koa1将会逐渐被koa2替代，毕竟使用co.js来处理generator是一种过渡的方式，虽然有其特定的应用场景，但是用async/await会更加优雅地实现同步写法。
+
+	async/await 的特点：
+	可以让异步逻辑用同步写法实现
+	最底层的await返回需要是Promise对象
+	可以通过多层 async function 的同步写法代替传统的callback嵌套
+
+	核心代码就是lib目录下的四个文件
+
+	application.js 是整个koa2 的入口文件，封装了context，request，response，以及最核心的中间件处理流程。
+	context.js 处理应用上下文，里面直接封装部分request.js和response.js的方法
+	request.js 处理http请求
+	response.js 处理http响应
+	只提供封装好http上下文、请求、响应，以及基于async/await的中间件容器。
